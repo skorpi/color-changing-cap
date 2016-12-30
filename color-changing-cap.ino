@@ -8,12 +8,7 @@
 Adafruit_NeoPixel onboard = Adafruit_NeoPixel(1, 8, NEO_GRB + NEO_KHZ800);
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(11, 10, NEO_GRB + NEO_KHZ800);
 
-#define PINK strip.Color(255,0,128)
 #define ORANGE strip.Color(255,75,0)
-
-#define PINK_R_START 255
-#define PINK_G_START 0
-#define PINK_B_START 128
 
 #define STRIP_THREES_BEGIN    0
 #define STRIP_THREES_END      2
@@ -25,11 +20,11 @@ CapPin cPin_r = CapPin(12);
 CapPin cPin_g = CapPin(6);
 CapPin cPin_b = CapPin(9);
 
-#define THRESH 500
+#define THRESH 50
 
-uint8_t pink_r = PINK_R_START;
-uint8_t pink_g = PINK_G_START;
-uint8_t pink_b = PINK_B_START;
+uint8_t pink_r = 255;
+uint8_t pink_g = 0;
+uint8_t pink_b = 128;
 
 void setup() {
   //Serial.begin(9600);
@@ -40,8 +35,8 @@ void setup() {
   strip.begin();
   strip.show();
 
-  onboard.setBrightness(BRIGHTNESS);
-  strip.setBrightness(BRIGHTNESS);
+  //onboard.setBrightness(BRIGHTNESS);
+  //strip.setBrightness(BRIGHTNESS);
 
   onboard.setPixelColor(0, onboard.Color(pink_r, pink_g, pink_b));
   onboard.show();
@@ -89,15 +84,15 @@ void loop() {
 }
 
 void changeColorR() {
- pink_r = increaseColor(pink_r, 5);
+ pink_r = increaseColor(pink_r);
  changeColor();
 }
 void changeColorG() {
- pink_g = increaseColor(pink_g, 5);
+ pink_g = increaseColor(pink_g);
  changeColor();
 }
 void changeColorB() {
- pink_b = increaseColor(pink_b, 5);
+ pink_b = increaseColor(pink_b);
  changeColor();
 }
 
@@ -110,7 +105,7 @@ void changeColor() {
  }
 }
 
-uint8_t increaseColor(uint8_t old, uint8_t increment) {
-  return old + increment;
+uint8_t increaseColor(uint8_t old) {
+  return old + 5;
 }
 
